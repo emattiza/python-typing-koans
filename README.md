@@ -13,6 +13,17 @@ A set of examples to learn optional static typing in Python.
 
 - If you want to use pip, `pip install -r requirements.txt`.
 
+### Nix Flake Install
+- Have direnv + nix 2.4+ with flakes configured and installed
+or
+- Run `nix develop .`
+- Configure your editor to use the nix python binary and environment (`$(which python)` can help you find this)
+
+### Gitpod Usage
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/emattiza/python-typing-koans)
+- Just run this repo, and then configure the python extension to use the python version created by nix (`$(which python)` can help you find this)
+- Gitpod workspace-full has nix with command and flakes experimental features enabled, and also has direnv
+
 ### Idea
 
 One of the best ways to learn python-typing is to annotate the code. In this repo, `koans` directory

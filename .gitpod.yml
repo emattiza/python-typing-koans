@@ -1,0 +1,9 @@
+tasks:
+  - name: Build Basic shell
+    init: |
+      nix develop . -c "python" "cli.py" "--help"
+
+vscode:
+  extensions:
+    - ms-pyright.pyright
+    - ms-python.python

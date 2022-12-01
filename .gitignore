@@ -139,3 +139,4 @@ cython_debug/
 
 # Internal repo ignore
 koans_copy/*
+.direnv
