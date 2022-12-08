@@ -4,7 +4,7 @@ Koan to learn annotating the class variables
 import datetime
 import random
 from string import ascii_letters
-from typing import TypedDict
+from typing import ClassVar, List, Optional, TypedDict, TypeVar
 
 
 class UserData(TypedDict):
@@ -23,14 +23,13 @@ def get_random_user_data() -> UserData:
         "last_seen": datetime.datetime.utcnow(),
     }
 
-
 class User:
     # Annotate the class variable
     # Documentation: https://docs.python.org/3/library/typing.html#typing.ClassVar
-    users: list = []
+    users: ClassVar[List["User"]] = []
 
     # Annotate the method arguments
-    def __init__(self, name, email, is_active, last_seen):
+    def __init__(self, name: str, email: str, is_active: bool, last_seen: datetime.datetime):
         self.name = name
         self.email = email
         self.is_active = is_active
@@ -38,27 +37,29 @@ class User:
 
     # Annotate the return type
     @classmethod
-    def add_user(cls, user):
+    def add_user(cls, user: "User") -> None:
         cls.users.append(user)
 
     # Annotate the method to return user when found and return None when missing
     @classmethod
-    def get_user(cls, name):
+    def get_user(cls, name: str) -> Optional["User"]:
         for user in cls.users:
             if user.name == name:
                 return user
+        return None
 
 
 # Annotate input arguments and return type as User
-def create_user(name, email, is_active, last_seen):
+def create_user(name: str, email: str, is_active: bool, last_seen: datetime.datetime) -> User:
     return User(name=name, email=email, is_active=is_active, last_seen=last_seen)
 
 
-def main():
+def main() -> None:
     for _ in range(10):
         user_data = get_random_user_data()
-        user = create_user(**user_data)
-        User.add_user(user)
+        user: Optional[User] = create_user(**user_data)
+        if user:
+            User.add_user(user)
 
     # Annotate the variable
     user = User.get_user(name="Guido")
